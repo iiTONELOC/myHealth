@@ -1,0 +1,28 @@
+{
+  "name": "myhealth",
+  "version": "1.0.0",
+  "description": "Personal app that tracks health information",
+  "main": "server/server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "cd server && node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iiTONELOC/myHealth.git"
+  },
+  "author": "iiTONELOC",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/iiTONELOC/myHealth/issues"
+  },
+  "homepage": "https://github.com/iiTONELOC/myHealth#readme",
+  "dependencies": {
+    "apollo-server-express": "^3.3.0",
+    "bcrypt": "^5.0.1",
+    "express": "^4.17.1",
+    "graphql": "^15.5.2",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.0.4"
+  }
+}
