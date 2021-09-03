@@ -7,7 +7,7 @@ import PageHeader from './components/PageHeader';
 import HomePage from './pages/HomePage';
 import SignUp from './pages/SignUp';
 import Login from './pages/Login';
-
+import UserHome from './pages/UserHome';
 
 
 export default function App() {
@@ -22,15 +22,18 @@ export default function App() {
             columns={['auto', 'flex']}
             areas={gridAreas}
             background='dark'
-          ></Grid>
-          <PageHeader />
-          <Box gridArea="main" justify="center" align="center" background="dark_1" pad='3px'>
-            <Switch>
-              <Route exact path='/' component={HomePage} />
-              <Route exact path='/sign-up' component={SignUp} />
-              <Route exact path='/login' component={Login} />
-            </Switch>
-          </Box>
+          >
+            <PageHeader />
+            <Box gridArea="main" justify="center" align="center" background="dark_1" pad='3px'>
+              <Switch>
+                <Route exact path='/' component={HomePage} />
+                <Route exact path='/sign-up' component={SignUp} />
+                <Route exact path='/login' component={Login} />
+                <Route exact path='/health' component={UserHome} />
+              </Switch>
+            </Box>
+          </Grid>
+
         </Grommet>
       </Router>
     </ApolloProvider>
