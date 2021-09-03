@@ -1,6 +1,7 @@
-import { Box, Grommet, Grid } from 'grommet';
+import { useState } from 'react';
+import { Box, Grommet } from 'grommet';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import { theme, gridAreas } from './grommetTheme';
+import { theme } from './grommetTheme';
 import { ApolloProvider } from '@apollo/client';
 import { client } from './apollo.config';
 import PageHeader from './components/PageHeader';
@@ -8,32 +9,40 @@ import HomePage from './pages/HomePage';
 import SignUp from './pages/SignUp';
 import Login from './pages/Login';
 import UserHome from './pages/UserHome';
-
+import { appResize, getHeight, getWidth } from './utils/resizer';
 
 export default function App() {
+  const [windowWidth, setWindowWidth] = useState(getWidth());
+  const [windowHeight, setWindowHeight] = useState(getHeight());
+  const data = {
+    setWidth: setWindowWidth,
+    setHeight: setWindowHeight
+  }
+  appResize(data);
   return (
-
     <ApolloProvider client={client}>
       <Router>
-        <Grommet theme={theme} background='dark'>
-          <Grid
-            fill
-            rows={['auto', 'flex']}
-            columns={['auto', 'flex']}
-            areas={gridAreas}
-            background='dark'
+        <Grommet theme={theme} background='dark' >
+          <Box
+            width={`${windowWidth}px`}
+            height={`${windowHeight}px`}
           >
             <PageHeader />
-            <Box gridArea="main" justify="center" align="center" background="dark_1" pad='3px'>
-              <Switch>
+            <Switch>
+              <Box
+                fill
+                justify="center"
+                align="center"
+                background="dark"
+                overflow={{ horizontal: 'hidden', vertical: 'hidden' }}
+              >
                 <Route exact path='/' component={HomePage} />
                 <Route exact path='/sign-up' component={SignUp} />
                 <Route exact path='/login' component={Login} />
                 <Route exact path='/health' component={UserHome} />
-              </Switch>
-            </Box>
-          </Grid>
-
+              </Box>
+            </Switch>
+          </Box>
         </Grommet>
       </Router>
     </ApolloProvider>

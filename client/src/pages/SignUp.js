@@ -129,10 +129,10 @@ export default function SignUp() {
                     <Box flex={false} as="footer" align="start" pad='small'>
                         {!userError && !emailError && !passwordError && (<Button
                             type="submit"
-                            label="Login"
+                            label="Sign Up"
                             onClick={handleFormSubmit}
                             primary
-                            color='brand_accent'
+                            color='accent-1'
                         />)}
                     </Box>
                 </Box>

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { LOGIN_USER } from '../utils/mutations';
 import Auth from '../utils/auth';
-
+import { validateEmail } from '../utils/helpers';
 import {
     Box,
     Button,
@@ -11,59 +11,58 @@ import {
     TextInput,
 } from 'grommet';
 
-
-
 export default function Login() {
-    // state of the form
     const [formState, setFormState] = useState({ email: '', password: '' });
-    // graphQl mutation to login 
+    const [emailError, setEmailError] = useState('');
+    const [passwordError, setPasswordError] = useState('');
     const [login, { error }] = useMutation(LOGIN_USER);
-    // change event handler
     const handleChange = (event) => {
         const { name, value } = event.target;
         setFormState({
             ...formState,
             [name]: value,
         });
+        if (event.target.name === 'email') {
+            const isValid = validateEmail(event.target.value);
+            if (!isValid) {
+                setEmailError('Your email is invalid.');
+            } else {
+                setEmailError('');
+            }
+        } else if (event.target.name === 'password') {
+            if (event.target.value.length < 6) {
+                setPasswordError(`Password's must be at least 5 characters!`)
+            } else {
+                setPasswordError(``)
+            }
+        }
     };
-    // form submit
     const handleFormSubmit = async event => {
         event.preventDefault();
-        /*
-        Try to login, catch any errors
-        if login is successful in the DB
-        Handle the login with our JWT utility function
-        */
         try {
             const { data } = await login({
                 variables: { ...formState }
             });
             const userData = await { ...data };
-            // if we have a successful login
             if (userData) {
                 const data = userData;
-                // destructure the token
                 const { login } = await data;
                 const { token } = await login;
-                // handle with JWT
                 Auth.login(token)
             }
         } catch (e) {
             console.error(e);
         }
     };
+    console.log(formState)
     return (
         <Box
-            fill='true'
+            fill
             align="center"
             justify="center"
             background='black'
-            height={{ min: '92vh' }}
-            width={{ min: '100vw' }}
         >
-
             <Box
-
                 overflow="auto"
                 width="medium"
                 pad="medium"
@@ -87,6 +86,7 @@ export default function Login() {
                             required
                         />
                     </FormField>
+                    {emailError && (<div ><p style={{ color: 'red' }}>{emailError}</p></div>)}
                     <FormField label="Password">
                         <TextInput
                             plain
@@ -97,18 +97,20 @@ export default function Login() {
                             required
                         />
                     </FormField>
+                    {passwordError && (<div style={{ color: 'red' }}>{passwordError}</div>)}
                     <Box flex={false} as="footer" align="start" pad='small'>
-                        <Button
-                            type="submit"
-                            label="Login"
-                            onClick={handleFormSubmit}
-                            primary
-                            color='brand_accent'
-                        />
+                        {formState.email !== '' && formState.password !== '' && !emailError && !passwordError && (
+                            <Button
+                                type="submit"
+                                label="Login"
+                                onClick={handleFormSubmit}
+                                primary
+                                color='accent-1'
+                            />
+                        )}
                     </Box>
                 </Box>
             </Box>
-
         </Box>
     );
 };
