@@ -4,8 +4,11 @@
   "description": "Personal app that tracks health information",
   "main": "server/server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "cd server && node server.js"
+    "start": "cd server && node server.js",
+    "develop": "concurrently \"cd server && npm run watch \" \"cd client && npm start\"",
+    "install": "cd server && npm i && cd ../client && npm i ",
+    "build": "cd client && npm run build",
+    "del-db": "cd server/seeders && node delete.js && cd .. && cd .."
   },
   "repository": {
     "type": "git",
@@ -18,11 +21,6 @@
   },
   "homepage": "https://github.com/iiTONELOC/myHealth#readme",
   "dependencies": {
-    "apollo-server-express": "^3.3.0",
-    "bcrypt": "^5.0.1",
-    "express": "^4.17.1",
-    "graphql": "^15.5.2",
-    "jsonwebtoken": "^8.5.1",
-    "mongoose": "^6.0.4"
+    "concurrently": "^6.2.1"
   }
 }
