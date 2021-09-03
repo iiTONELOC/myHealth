@@ -1,25 +1,39 @@
-import logo from './logo.svg';
-import './App.css';
+import { Box, Grommet, Grid } from 'grommet';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { theme, gridAreas } from './grommetTheme';
+import { ApolloProvider } from '@apollo/client';
+import { client } from './apollo.config';
+import PageHeader from './components/PageHeader';
+import HomePage from './pages/HomePage';
+import SignUp from './pages/SignUp';
+import Login from './pages/Login';
 
-function App() {
+
+
+export default function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
 
-export default App;
+    <ApolloProvider client={client}>
+      <Router>
+        <Grommet theme={theme} background='dark'>
+          <Grid
+            fill
+            rows={['auto', 'flex']}
+            columns={['auto', 'flex']}
+            areas={gridAreas}
+            background='dark'
+          ></Grid>
+          <PageHeader />
+          <Box gridArea="main" justify="center" align="center" background="dark_1" pad='3px'>
+            <Switch>
+              <Route exact path='/' component={HomePage} />
+              <Route exact path='/sign-up' component={SignUp} />
+              <Route exact path='/login' component={Login} />
+            </Switch>
+          </Box>
+        </Grommet>
+      </Router>
+    </ApolloProvider>
+
+  );
+};
