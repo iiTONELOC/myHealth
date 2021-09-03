@@ -3,8 +3,6 @@ const mongoose = require('mongoose');
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/myHealth', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
-  useCreateIndex: true,
-  useFindAndModify: false
-});
+}).then(res => res.connection.getClient());
 
 module.exports = mongoose.connection;

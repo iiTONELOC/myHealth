@@ -5,9 +5,9 @@ const dailyReadingSchema = new Schema(
             type: Schema.Types.ObjectId,
             ref: 'BloodPressure'
         },
-        user: {
-            type: Schema.Types.ObjectId,
-            ref: 'User'
+        pulse: {
+            type: Number,
+            required: 'Please enter a valid number'
         },
         dateTime: {
             type: Date,

@@ -7,11 +7,9 @@ const bloodPressureSchema = new Schema(
             required: true,
         },
         diastolic: {
-            type: String,
+            type: Number,
             required: true,
-            unique: true,
-            match: [/.+@.+\..+/, 'Must match an email address!']
-        },
+        }
     },
 );
 
