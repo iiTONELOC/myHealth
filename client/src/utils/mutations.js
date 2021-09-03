@@ -37,7 +37,7 @@ mutation addBloodPressure($systolic: Int!, $diastolic: Int!) {
 `;
 
 export const ADD_DAILY_RD = gql`
-mutation addDailyReading($pulse: Int!, $bloodPressure: ID!, $dateTime: Int) {
+mutation addDailyReading($pulse: Int!, $bloodPressure: ID!, $dateTime: ID) {
     addDailyReading(pulse: $pulse, bloodPressure: $bloodPressure, dateTime: $dateTime) {
     _id
     username

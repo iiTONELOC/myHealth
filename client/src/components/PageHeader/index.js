@@ -16,8 +16,8 @@ export default function PageHeader() {
             direction="row"
             align="center"
             justify="end"
-            background="dark_2"
-            height="60px"
+            background="dark_1"
+            pad='small'
         >
             <Box
                 justify='between'

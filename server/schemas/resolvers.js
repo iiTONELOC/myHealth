@@ -1,10 +1,10 @@
 const { User, BloodPressure, DailyReading } = require('../models');
 const { AuthenticationError } = require('apollo-server-express');
 const { signToken } = require('../utils/auth');
-
-
+const { dateScalar } = require('./scalars')
 
 const resolvers = {
+    Date: dateScalar,
     Query: {
         me: async (parent, args, context) => {
             if (context.user) {
@@ -49,9 +49,7 @@ const resolvers = {
         },
         addBloodPressure: async (parent, args, context) => {
             // make sure logged in
-            console.log(context.user)
             const newPressure = await BloodPressure.create({ ...args });
-            console.log(newPressure)
             return newPressure
         },
         addDailyReading: async (parent, args, context) => {
@@ -59,12 +57,11 @@ const resolvers = {
             // then update user
             if (context.user) {
                 const newEntry = await DailyReading.create({ ...args });
-                console.log(newEntry)
                 if (newEntry !== null) {
                     const { _id } = newEntry;
                     const updatedUserInfo = await User.findByIdAndUpdate(context.user._id, {
                         $push: { dailyReadings: _id }
-                    });
+                    }, { new: true }).select('-__v');;
                     return updatedUserInfo
                 }
             }

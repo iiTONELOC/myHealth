@@ -14,9 +14,21 @@ export const theme = {
             size: '18px',
             height: '20px',
         },
-        colors
-
+        colors,
+        focus: {
+            outline: {
+                color: 'none'
+            }
+        }
     },
+    rangeInput: {
+        thumb: {
+            color: 'gray'
+        },
+        track: {
+            color: 'accent-1'
+        }
+    }
 };
 export const gridAreas = [
     { name: 'header', start: [0, 0], end: [1, 0] },

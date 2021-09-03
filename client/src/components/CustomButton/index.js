@@ -1,4 +1,4 @@
-import { Box } from 'grommet';
+import { Box, Text } from 'grommet';
 import { useState } from 'react';
 export default function CustomButton(props) {
     const { name, onClick } = props
@@ -15,7 +15,7 @@ export default function CustomButton(props) {
             background={active ? 'accent-1' : 'gray'}
             onClick={onClick}
         >
-            {name}
+            <Text alignSelf='center'>{name}</Text>
         </Box>
     );
 };

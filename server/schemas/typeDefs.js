@@ -1,7 +1,7 @@
 const { gql } = require('apollo-server-express');
 
 const typeDefs = gql`
-
+scalar Date
 type User {
     _id: ID
     username: String
@@ -17,7 +17,7 @@ type DailyReading{
     _id: ID
     bloodPressure: BloodPressure
     pulse: Int
-    dateTime: Int
+    dateTime: Date 
 }
 
 type Query {
@@ -30,7 +30,7 @@ type Mutation {
     login(email: String!, password: String!): Auth
     addUser(username: String!, email: String!, password: String!, profilePicture: String): Auth
     addBloodPressure(systolic: Int!, diastolic: Int!): BloodPressure
-    addDailyReading(pulse: Int, bloodPressure: ID!, dateTime: Int ) : User
+    addDailyReading(pulse: Int, bloodPressure: ID!, dateTime: ID ) : User
 }
 type Auth {
     token: ID!
