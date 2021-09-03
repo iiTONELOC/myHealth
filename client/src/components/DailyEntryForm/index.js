@@ -112,7 +112,7 @@ export default function DailyEntryForm() {
     };
 
     const CancelData = {
-        name: 'Cancel', onClick: (e) => cancelHandler(e),
+        name: 'Cancel', onClick: (e) => cancelHandler(e), color: 'red', colorHover: 'black'
     }
 
     return (

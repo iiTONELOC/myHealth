@@ -25,7 +25,6 @@ function RangeInputs(props) {
             >
                 {props.value}
             </Text>
-
         </Box>
     )
 }
