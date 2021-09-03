@@ -10,6 +10,7 @@ function RangeInputs(props) {
                 size="medium"
                 weight="bold"
                 alignSelf='center'
+                style={{ marginTop: props.name === 'Diastolic Pressure' ? '10px' : null }}
             >
                 {props.name}
             </Text>
@@ -17,7 +18,14 @@ function RangeInputs(props) {
                 style={{ marginBottom: '15px', marginTop: '10px' }}
                 {...props}
             />
-            {props.value}
+            <Text
+                size="medium"
+                weight="bold"
+                alignSelf='center'
+            >
+                {props.value}
+            </Text>
+
         </Box>
     )
 }

@@ -21,12 +21,24 @@ export default function DailyEntryForm() {
     const [showDatePicker, setDatePicker] = useState(false);
     const [addBloodPressure] = useMutation(ADD_BP);
     const [addDailyReading] = useMutation(ADD_DAILY_RD);
+    function isInitial() {
+        if (count !== 0 || value !== initValue || systolic !== initSystolic || diastolic !== initDiastolic) {
+            return false
+        } else {
+            return true
+        }
+    }
+    const showButton = {
+        isInitial: isInitial()
+    }
     const systolicHandler = (e) => {
         e.preventDefault()
         setSystolic(e.target.value)
+
     }
     const diastolicHandler = (e) => {
         setDiastolic(e.target.value)
+
     }
     const bpfd = {
         systolic, diastolic, systolicHandler, diastolicHandler, showDatePicker
@@ -35,7 +47,8 @@ export default function DailyEntryForm() {
         setValue(initValue);
         setSystolic(initSystolic);
         setDiastolic(initDiastolic);
-        setDate(false)
+        setDatePicker(false);
+        if (count > 0) setCount(0);
     }
     const handleDateChange = (e) => {
         const timeStamp = new Date(e.target.value).getTime();
@@ -74,7 +87,6 @@ export default function DailyEntryForm() {
         const shouldRefresh = createNewEntry();
         if (shouldRefresh) {
             setInitial();
-            setCount(0);
             handleMessage('Daily Entry successfully added!')
         }
     }
@@ -89,12 +101,19 @@ export default function DailyEntryForm() {
             }
         } else {
             SubmitAndReset()
-            setDatePicker(false)
         }
     };
+    const cancelHandler = (e) => {
+        e.preventDefault()
+        return setInitial()
+    }
     const btnData = {
-        name: 'Submit Entry', onClick: (e) => entryHandler(e)
+        name: 'Submit Entry', onClick: (e) => entryHandler(e),
     };
+
+    const CancelData = {
+        name: 'Cancel', onClick: (e) => cancelHandler(e),
+    }
 
     return (
         <>
@@ -112,11 +131,29 @@ export default function DailyEntryForm() {
                     {showDatePicker && (<DatePickerForm onChange={(e) => handleDateChange(e)} />)}
                 </Box>
                 <Box
-                    width='150px'
-                    alignSelf='center'
-                    margin={{ top: '5px', right: '15px' }}
+                    fill='horizontal'
+                    direction='row'
+                    justify='center'
+                    alignContent='center'
                 >
-                    <CustomButton {...btnData} />
+                    <Box
+                        width='150px'
+                        alignSelf='center'
+                        margin={{ top: '5px', right: '15px' }}
+                        direction='row'
+                    >
+                        <CustomButton {...btnData} />
+                    </Box>
+                    {showButton.isInitial !== true && (
+                        <Box
+                            width='150px'
+                            alignSelf='center'
+                            margin={{ top: '5px', right: '15px' }}
+                            direction='row'
+                        >
+                            <CustomButton {...CancelData} />
+                        </Box>
+                    )}
                 </Box>
             </Box>
         </>

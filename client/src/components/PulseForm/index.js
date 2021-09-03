@@ -1,6 +1,6 @@
-
-import { Box, Text, Card, CardBody, RangeInput } from 'grommet';
+import { Box, Text, RangeInput } from 'grommet';
 import { RiPulseLine as PulseIcon } from 'react-icons/ri'
+
 export default function PulseForm({ value, set }) {
     return (
         <Box
@@ -12,7 +12,6 @@ export default function PulseForm({ value, set }) {
             direction='column'
             justify='evenly'
         >
-
             <Box
                 align="center"
                 fill
@@ -45,7 +44,6 @@ export default function PulseForm({ value, set }) {
                             value={value}
                             onChange={set}
                         />
-
                         <Text
                             size="medium"
                             weight="bold"
@@ -54,11 +52,8 @@ export default function PulseForm({ value, set }) {
                             {value}
                         </Text>
                     </Box>
-
                 </Box>
             </Box>
-
         </Box>
-
     )
 }
