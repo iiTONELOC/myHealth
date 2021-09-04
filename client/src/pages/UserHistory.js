@@ -28,7 +28,6 @@ export default function UserHistory() {
         if (data) {
             const { me } = { ...data };
             const { dailyReadings } = me;
-            console.log(dailyReadings)
             return (dailyReadings ? dailyReadings.map(reading => (
                 <Box background='dark_1' pad='xsmall' key={reading._id} round='small' justify='start' alignContent='center' direction='column' height={{ min: '250px' }}>
                     <Box justify='center' alignContent='center' background='dark_2' style={{ borderRadius: '8px 8px 0px 0px' }} pad='small'>

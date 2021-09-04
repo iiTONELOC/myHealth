@@ -1,0 +1,30 @@
+ /* width */
+
+ ::-webkit-scrollbar {
+     width: 8px;
+ }
+
+ /* Track */
+
+ ::-webkit-scrollbar-track {
+     background: #000000;
+ }
+
+ /* Handle */
+
+ ::-webkit-scrollbar-thumb {
+     background: rgb(22, 24, 22);
+ }
+
+ /* Handle on hover */
+
+ ::-webkit-scrollbar-thumb:hover {
+     background: rgb(77, 238, 85);
+ }
+
+ /* for firefox */
+
+ * {
+     scrollbar-width: thin;
+     scrollbar-color: #000000 rgb(77, 238, 85);
+ }

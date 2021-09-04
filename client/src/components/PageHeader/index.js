@@ -19,10 +19,31 @@ const buttons = [
     { name: 'Login', onClick: (e) => clickHandler(e, 'login') },
     { name: 'Sign Up', onClick: (e) => clickHandler(e, 'sign-up') }
 ];
+const renderButtonName = () => {
+    const currentLocation = window.location.pathname;
+    if (currentLocation === '/health') {
+        return 'History'
+    } else {
+        return 'Daily Entry'
+    }
+};
+const dailyHandler = (e) => {
+    e.preventDefault();
+    window.location.assign('/health')
+}
+const renderButtonOnClick = (e) => {
+    const currentLocation = window.location.pathname;
+    if (currentLocation === '/health') {
+        return historyHandler(e)
+    } else {
+        return dailyHandler(e)
+    }
+}
 const loggedInButtons = [
-    { name: 'History', onClick: (e) => historyHandler(e) },
-    { name: 'Logout', onClick: (e) => logoutHandler(e) }
-]
+    { name: renderButtonName(), onClick: (e) => renderButtonOnClick(e) },
+    { name: 'Logout', onClick: (e) => logoutHandler(e) },
+
+];
 export default function PageHeader() {
     const loggedIn = Auth.getToken();
     return (
@@ -35,14 +56,13 @@ export default function PageHeader() {
             pad='small'
         >
             <Box>
-                <Text color='accent-1' size='xxlarge' onClick={() => window.location.assign('/health')}>H</Text>
+                <Text color='accent-1' size='xxlarge' onClick={() => window.location.assign('/')}>H</Text>
             </Box>
             <Box
                 justify='between'
                 direction='row'
-                width='175px'
+                width={{ min: '225px' }}
             >
-
                 {!loggedIn ? buttons.map(button => (<CustomButton key={`${button.name}-button`} {...button} />)) : loggedInButtons.map(button => (<CustomButton key={`${button.name}-button`} {...button} />))}
             </Box>
         </Box>)
