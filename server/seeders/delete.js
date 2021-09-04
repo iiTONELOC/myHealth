@@ -1,5 +1,5 @@
 const db = require('../config/connection');
-const { User, BloodPressure, DailyReading } = require('../models');
+const { User, BloodPressure, DailyReading } = require('../Models');
 
 
 db.once('open', async () => {
