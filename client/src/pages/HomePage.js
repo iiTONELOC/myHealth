@@ -2,6 +2,6 @@
 export default function HomePage() {
 
     return (
-        `Welcome Home`
+        `Welcome to MyHealth! Please sign in or create an account!`
     )
 }

@@ -9,6 +9,7 @@ import HomePage from './pages/HomePage';
 import SignUp from './pages/SignUp';
 import Login from './pages/Login';
 import UserHome from './pages/UserHome';
+import UserHistory from './pages/UserHistory'
 import { appResize, getHeight, getWidth } from './utils/resizer';
 
 export default function App() {
@@ -40,6 +41,7 @@ export default function App() {
                 <Route exact path='/sign-up' component={SignUp} />
                 <Route exact path='/login' component={Login} />
                 <Route exact path='/health' component={UserHome} />
+                <Route exact path='/user-history/:id' component={UserHistory} />
               </Box>
             </Switch>
           </Box>
