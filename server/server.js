@@ -23,10 +23,12 @@ async function startApolloServer() {
     await apolloServer.start();
     app.use(express.urlencoded({ extended: true }));
     app.use(express.json());
-    app.use(express.static(path.join(__dirname, '../client/build')));
-    app.get('*', (req, res) => {
-        res.sendFile(path.join(__dirname, '../client/build/index.html'));
-    });
+    if (process.env.NODE_ENV === 'production') {
+        app.use(express.static(path.join(__dirname, '../client/build')));
+        app.get('*', (req, res) => {
+            res.sendFile(path.join(__dirname, '../client/build/index.html'));
+        });
+    }
     apolloServer.applyMiddleware({ app, });
     await new Promise(resolve => app.listen({ port: PORT }, resolve));
     console.log(`🚀 Server ready at http://localhost:${PORT}${apolloServer.graphqlPath}`);
