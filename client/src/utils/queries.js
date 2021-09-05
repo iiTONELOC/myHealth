@@ -20,11 +20,8 @@ query Query {
             _id
             pulse
             dateTime
-            bloodPressure {
-                _id
-                systolic
-                diastolic
-            }
+            systolic
+            diastolic
         }
     }
 }

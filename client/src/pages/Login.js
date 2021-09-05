@@ -54,7 +54,6 @@ export default function Login() {
             console.error(e);
         }
     };
-    console.log(formState)
     return (
         <Box
             fill

@@ -1,13 +1,17 @@
 const { Schema, model } = require('mongoose');
 const dailyReadingSchema = new Schema(
     {
-        bloodPressure: {
-            type: Schema.Types.ObjectId,
-            ref: 'BloodPressure'
+        systolic: {
+            type: Number,
+            required: 'Please enter a valid systolic pressure'
+        },
+        diastolic: {
+            type: Number,
+            required: 'Please enter a valid diastolic pressure'
         },
         pulse: {
             type: Number,
-            required: 'Please enter a valid number'
+            required: 'Please enter a valid pulse'
         },
         dateTime: {
             type: Date,

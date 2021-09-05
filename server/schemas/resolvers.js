@@ -1,4 +1,4 @@
-const { User, BloodPressure, DailyReading } = require('../Models');
+const { User, DailyReading } = require('../Models');
 const { AuthenticationError } = require('apollo-server-express');
 const { signToken } = require('../utils/auth');
 const { dateScalar } = require('./scalars')
@@ -10,7 +10,7 @@ const resolvers = {
             if (context.user) {
                 const userData = await User.findOne({ _id: context.user._id })
                     .select('-__v -password')
-                    .populate({ path: 'dailyReadings', populate: 'bloodPressure' })
+                    .populate('dailyReadings')
                 return userData;
             }
             throw new AuthenticationError('Not logged in');
@@ -46,11 +46,6 @@ const resolvers = {
             }
             const token = signToken(user);
             return { token, user };
-        },
-        addBloodPressure: async (parent, args, context) => {
-            // make sure logged in
-            const newPressure = await BloodPressure.create({ ...args });
-            return newPressure
         },
         addDailyReading: async (parent, args, context) => {
             // create the dailyReading

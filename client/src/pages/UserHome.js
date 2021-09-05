@@ -1,6 +1,6 @@
 
 import { Box, Heading } from 'grommet';
-import DailyEntryForm from '../components/DailyEntryForm';
+import DailyReadingForm from '../components/DailyReadingForm';
 
 
 export default function UserHome() {
@@ -39,7 +39,7 @@ export default function UserHome() {
                     Blood Pressure Tracker
                 </Heading>
                 {/* box that holds the components will act as a form */}
-                <DailyEntryForm />
+                <DailyReadingForm />
             </Box>
         </Box>
     )

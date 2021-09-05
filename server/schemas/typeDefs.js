@@ -15,7 +15,8 @@ type BloodPressure{
 }
 type DailyReading{
     _id: ID
-    bloodPressure: BloodPressure
+     systolic: Int
+    diastolic: Int
     pulse: Int
     dateTime: Date 
 }
@@ -30,7 +31,7 @@ type Mutation {
     login(email: String!, password: String!): Auth
     addUser(username: String!, email: String!, password: String!, profilePicture: String): Auth
     addBloodPressure(systolic: Int!, diastolic: Int!): BloodPressure
-    addDailyReading(pulse: Int, bloodPressure: ID!, dateTime: ID ) : User
+    addDailyReading(pulse: Int,  dateTime: ID, systolic: Int!, diastolic: Int! ) : User
 }
 type Auth {
     token: ID!

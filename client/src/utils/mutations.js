@@ -26,30 +26,18 @@ mutation addUser($username: String!, $email: String!, $password: String!) {
 }
 `;
 
-export const ADD_BP = gql`
-mutation addBloodPressure($systolic: Int!, $diastolic: Int!) {
-    addBloodPressure(systolic: $systolic, diastolic: $diastolic) {
-    _id
-    systolic
-    diastolic
-    }
-}
-`;
 
 export const ADD_DAILY_RD = gql`
-mutation addDailyReading($pulse: Int!, $bloodPressure: ID!, $dateTime: ID) {
-    addDailyReading(pulse: $pulse, bloodPressure: $bloodPressure, dateTime: $dateTime) {
+mutation addDailyReading($pulse: Int!,  $dateTime: ID,$systolic: Int!, $diastolic: Int!) {
+    addDailyReading(pulse: $pulse,  dateTime: $dateTime,systolic: $systolic, diastolic: $diastolic) {
     _id
     username
     dailyReadings {
         _id
         dateTime
         pulse
-    bloodPressure {
-        _id
         diastolic
         systolic
-    }
     }
 }
 }

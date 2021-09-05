@@ -5,10 +5,10 @@ import PulseForm from "../PulseForm";
 import BloodPressureForm from "../BloodPressureForm";
 import DatePickerForm from "../DatePickerForm";
 import CustomButton from '../CustomButton';
-import { ADD_BP, ADD_DAILY_RD } from '../../utils/mutations';
+import { ADD_DAILY_RD } from '../../utils/mutations';
 
 
-export default function DailyEntryForm() {
+export default function DailyReadingForm() {
     const initValue = 60;
     const initSystolic = 120;
     const initDiastolic = 80;
@@ -19,7 +19,6 @@ export default function DailyEntryForm() {
     const [date, setDate] = useState(false);
     const [message, setMessage] = useState(false);
     const [showDatePicker, setDatePicker] = useState(false);
-    const [addBloodPressure] = useMutation(ADD_BP);
     const [addDailyReading] = useMutation(ADD_DAILY_RD);
     function isInitial() {
         if (count !== 0 || value !== initValue || systolic !== initSystolic || diastolic !== initDiastolic) {
@@ -55,27 +54,13 @@ export default function DailyEntryForm() {
         setDate(timeStamp);
     }
     const createNewEntry = async () => {
-        // grab BP first and create BP entry
-        // grab returned ID and create a new DailyEntry with the BP ID and pulse
-
-        const bpData = await addBloodPressure({ variables: { systolic: parseFloat(systolic), diastolic: parseFloat(diastolic) } });
-        if (bpData) {
-            const { data } = bpData;
-            const ID = data.addBloodPressure._id;
-            // create new Daily
-            if (ID) {
-                const dailyVars = {
-                    pulse: parseFloat(value),
-                    bloodPressure: ID,
-                    dateTime: date ? date : Date.now()
-                }
-                return addDailyReading({ variables: { ...dailyVars } });
-            } else {
-                return false
-            }
-        } else {
-            return false
+        const dailyVars = {
+            pulse: parseFloat(value),
+            systolic: parseFloat(systolic),
+            diastolic: parseFloat(diastolic),
+            dateTime: date ? date : Date.now()
         }
+        return addDailyReading({ variables: { ...dailyVars } });
     }
     const handleMessage = (message) => {
         setMessage(message);
