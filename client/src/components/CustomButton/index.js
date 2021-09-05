@@ -12,10 +12,10 @@ export default function CustomButton(props) {
             round='xsmall'
             onMouseOver={() => handleActive()}
             onMouseOut={() => handleActive()}
-            background={active ? props.colorHover ? props.colorHover : 'accent-1' : props.color ? props.color : 'gray'}
+            background={active ? props.colorHover ? props.colorHover : 'status-ok' : props.color ? props.color : 'gray'}
             onClick={onClick}
         >
-            <Text alignSelf='center'>{name}</Text>
+            <Text alignSelf='center' color={'white'} size={active ? 'large' : 'medium'} style={{ textShadow: `1px 1px 1px black`, letterSpacing: '1px' }}>{name}</Text>
         </Box>
     );
 };

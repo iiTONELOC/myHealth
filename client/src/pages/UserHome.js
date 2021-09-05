@@ -23,7 +23,7 @@ export default function UserHome() {
                 <Heading
                     level='2'
                     margin={{ top: '-1px' }}
-                    style={{ padding: '5px' }}
+                    style={{ padding: '5px', textShadow: `1px 1px 1px black` }}
                 >
                     Blood Pressure Tracker
                 </Heading>

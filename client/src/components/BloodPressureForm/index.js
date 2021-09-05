@@ -1,20 +1,21 @@
 import { Box, Text, Card, CardBody, RangeInput } from 'grommet';
 import { RiHeartPulseFill as PulseIcon } from 'react-icons/ri';
-function RangeInputs(props) {
+function RenderInputs(props) {
     return (
         <Box
             key={props.name}
             fill
         >
             <Text
-                size="medium"
-                weight="bold"
+                size="large"
+                weight='bold'
                 alignSelf='center'
-                style={{ marginTop: '10px' }}
+                style={{ marginTop: '10px', textShadow: `1px 1px 1px black`, letterSpacing: '1px' }}
             >
                 {props.name}
             </Text>
             <input
+                className='customInput'
                 type='number'
                 style={{ marginTop: '15px', outlineColor: 'accent-1' }}
                 {...props}
@@ -25,14 +26,14 @@ function RangeInputs(props) {
                 alignSelf='center'
                 style={{ marginTop: '15px' }}
             >
-                {props.value}
+                {/* {props.value} */}
             </Text>
         </Box>
     );
 };
 
 export default function BloodPressureForm({ systolic, diastolic, systolicHandler, diastolicHandler, setValue, showDatePicker, value }) {
-    const rangeData = [
+    const inputData = [
         { name: `Pulse`, min: '40', max: '150', onChange: (e) => setValue(e), value: value },
         { name: `Systolic Pressure`, min: '60', max: '210', onChange: (e) => systolicHandler(e), value: systolic },
         { name: 'Diastolic Pressure', min: '60', max: '150', onChange: (e) => diastolicHandler(e), value: diastolic }
@@ -61,7 +62,7 @@ export default function BloodPressureForm({ systolic, diastolic, systolicHandler
                         pad='medium'
                         margin='-15px'
                     >
-                        {rangeData.map(el => (<RangeInputs key={el.name} {...el} />))}
+                        {inputData.map(el => (<RenderInputs key={el.name} {...el} />))}
                     </Box>
                 </Box>
             </CardBody>

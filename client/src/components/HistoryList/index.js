@@ -50,7 +50,7 @@ export const HistoryList = (DATA) => {
             bloodPressure: `${el.systolic}/${el.diastolic}`
         }
     )).sort((a, b) => a.date - b.date);
-    const step = 10;
+    const step = 7;
     return (
         <Box align="center" pad="small" fill>
             <DataTable

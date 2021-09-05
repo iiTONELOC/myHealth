@@ -17,7 +17,7 @@ export default function UserHistory() {
             justify='start'
             overflow={{ horizontal: 'hidden', vertical: 'auto' }}
             pad="xsmall"
-            fill
+            width='90vw'
         >
             <Text
                 size='xxlarge'

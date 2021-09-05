@@ -5,7 +5,7 @@ import BloodPressureForm from "../BloodPressureForm";
 import DatePickerForm from "../DatePickerForm";
 import CustomButton from '../CustomButton';
 import { ADD_DAILY_RD } from '../../utils/mutations';
-
+import './input.css'
 export default function DailyReadingForm() {
     const initValue = 60;
     const initSystolic = 120;
@@ -27,17 +27,22 @@ export default function DailyReadingForm() {
         };
     };
     const showButton = {
-        isInitial: isInitial()
+        isInitial: isInitial(),
+    };
+    const Value = (e) => {
+        return e.target?.value || e || '';
     };
     const systolicHandler = (e) => {
-        e.preventDefault();
-        setSystolic(e.target.value);
+        setSystolic(Value(e));
     };
     const diastolicHandler = (e) => {
-        setDiastolic(e.target.value);
+        setDiastolic(Value(e));
+    };
+    const valueHandler = (e) => {
+        setValue(Value(e));
     };
     const bloodPressureFormData = {
-        systolic, diastolic, systolicHandler, diastolicHandler, showDatePicker, value, setValue: (e) => setValue(e.target.value)
+        systolic, diastolic, systolicHandler, diastolicHandler, showDatePicker, value, setValue: (e) => valueHandler(e.target.value)
     };
     const setInitial = () => {
         setValue(initValue);
@@ -55,7 +60,6 @@ export default function DailyReadingForm() {
     const createNewEntry = async () => {
         // build dateTime obj
         // needs timestamp format for db
-
         const dailyVars = {
             pulse: parseFloat(value),
             systolic: parseFloat(systolic),
@@ -98,7 +102,7 @@ export default function DailyReadingForm() {
         name: 'Submit Entry', onClick: (e) => entryHandler(e),
     };
     const CancelData = {
-        name: 'Cancel', onClick: (e) => cancelHandler(e), color: 'red', colorHover: 'black'
+        name: 'Cancel', onClick: (e) => cancelHandler(e), colorHover: 'status-critical'
     };
     return (
         <>
@@ -109,8 +113,25 @@ export default function DailyReadingForm() {
                 align='center'
                 pad='small'
             >
-                {message && (<Text color='accent-1' size='large' style={{ textShadow: '1px 1px 1px black', marginBottom: '10px' }}>{message}</Text>)}
-                <Box fill direction='row' justify='center' alignContent='center' margin={{ bottom: '5px' }}>
+                {message && (
+                    <Text
+                        color='accent-1'
+                        size='large'
+                        style={{
+                            textShadow: '1px 1px 1px black',
+                            marginBottom: '10px'
+                        }}
+                    >
+                        {message}
+                    </Text>
+                )}
+                <Box
+                    fill
+                    direction='row'
+                    justify='center'
+                    alignContent='center'
+                    margin={{ bottom: '5px' }}
+                >
                     <BloodPressureForm {...bloodPressureFormData} />
                     {showDatePicker && (
                         <DatePickerForm
