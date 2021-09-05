@@ -10,18 +10,20 @@ function RangeInputs(props) {
                 size="medium"
                 weight="bold"
                 alignSelf='center'
-                style={{ marginTop: props.name === 'Diastolic Pressure' ? '10px' : null }}
+                style={{ marginTop: '10px' }}
             >
                 {props.name}
             </Text>
-            <RangeInput
-                style={{ marginBottom: '15px', marginTop: '10px' }}
+            <input
+                type='number'
+                style={{ marginTop: '15px', outlineColor: 'accent-1' }}
                 {...props}
             />
             <Text
                 size="medium"
                 weight="bold"
                 alignSelf='center'
+                style={{ marginTop: '15px' }}
             >
                 {props.value}
             </Text>
@@ -29,8 +31,9 @@ function RangeInputs(props) {
     );
 };
 
-export default function BloodPressureForm({ systolic, diastolic, systolicHandler, diastolicHandler, showDatePicker }) {
+export default function BloodPressureForm({ systolic, diastolic, systolicHandler, diastolicHandler, setValue, showDatePicker, value }) {
     const rangeData = [
+        { name: `Pulse`, min: '40', max: '150', onChange: (e) => setValue(e), value: value },
         { name: `Systolic Pressure`, min: '60', max: '210', onChange: (e) => systolicHandler(e), value: systolic },
         { name: 'Diastolic Pressure', min: '60', max: '150', onChange: (e) => diastolicHandler(e), value: diastolic }
     ];
@@ -38,7 +41,7 @@ export default function BloodPressureForm({ systolic, diastolic, systolicHandler
         <Card
             background='dark'
             elevation='none'
-            height='300px'
+            alignSelf='center'
             width='450px'
             margin={{ left: '13px', right: showDatePicker ? '13px' : null }}
         >

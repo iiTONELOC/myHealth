@@ -60,7 +60,7 @@ export const HistoryList = (DATA) => {
                 paginate
                 border={{ side: 'bottom', color: 'dark_3' }}
                 pad='medium'
-
+                fill
             />
         </Box>
     );

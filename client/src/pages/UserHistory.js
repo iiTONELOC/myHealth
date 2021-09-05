@@ -32,7 +32,7 @@ export default function UserHistory() {
                 pad='large'
                 direction='column'
                 overflow={{ horizontal: 'hidden', vertical: 'auto' }}
-                height='auto'
+                fill
             >
                 {data && (<HistoryList {...data} />)}
             </Box>

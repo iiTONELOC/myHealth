@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { Box, Text } from 'grommet';
 import { useMutation } from '@apollo/client';
-import PulseForm from "../PulseForm";
 import BloodPressureForm from "../BloodPressureForm";
 import DatePickerForm from "../DatePickerForm";
 import CustomButton from '../CustomButton';
@@ -37,8 +36,8 @@ export default function DailyReadingForm() {
     const diastolicHandler = (e) => {
         setDiastolic(e.target.value);
     };
-    const bpfd = {
-        systolic, diastolic, systolicHandler, diastolicHandler, showDatePicker
+    const bloodPressureFormData = {
+        systolic, diastolic, systolicHandler, diastolicHandler, showDatePicker, value, setValue: (e) => setValue(e.target.value)
     };
     const setInitial = () => {
         setValue(initValue);
@@ -111,9 +110,8 @@ export default function DailyReadingForm() {
                 pad='small'
             >
                 {message && (<Text color='accent-1' size='large' style={{ textShadow: '1px 1px 1px black', marginBottom: '10px' }}>{message}</Text>)}
-                <Box fill direction='row' justify='center' margin={{ bottom: '5px' }}>
-                    <PulseForm value={value} set={(e) => setValue(e.target.value)} />
-                    <BloodPressureForm {...bpfd} />
+                <Box fill direction='row' justify='center' alignContent='center' margin={{ bottom: '5px' }}>
+                    <BloodPressureForm {...bloodPressureFormData} />
                     {showDatePicker && (
                         <DatePickerForm
                             onDateChange={(e) => handleDateChange(e)}
@@ -124,26 +122,26 @@ export default function DailyReadingForm() {
                     fill='horizontal'
                     direction='row'
                     justify='center'
-                    alignContent='center'
+                    margin={{ top: '10px' }}
                 >
                     <Box
-                        width='150px'
                         alignSelf='center'
-                        margin={{ top: '5px', right: '15px' }}
+                        justify='center'
                         direction='row'
+                        width='449px'
+                        margin={{ left: '10px' }}
+                    ><Box
+                        justify='center'
+                        fill
+                        direction='row'
+                        gap='medium'
                     >
-                        <CustomButton {...btnData} />
-                    </Box>
-                    {showButton.isInitial !== true && (
-                        <Box
-                            width='150px'
-                            alignSelf='center'
-                            margin={{ top: '5px', right: '15px' }}
-                            direction='row'
-                        >
-                            <CustomButton {...CancelData} />
+                            <CustomButton {...btnData} />
+                            {showButton.isInitial !== true && (
+                                <CustomButton {...CancelData} />
+                            )}
                         </Box>
-                    )}
+                    </Box>
                 </Box>
             </Box>
         </>

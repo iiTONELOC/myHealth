@@ -15,11 +15,11 @@ import { appResize, getHeight, getWidth } from './utils/resizer';
 export default function App() {
   const [windowWidth, setWindowWidth] = useState(getWidth());
   const [windowHeight, setWindowHeight] = useState(getHeight());
-  const data = {
+  const resizeData = {
     setWidth: setWindowWidth,
     setHeight: setWindowHeight
   }
-  appResize(data);
+  appResize(resizeData);
   return (
     <ApolloProvider client={client}>
       <Router>
@@ -48,6 +48,5 @@ export default function App() {
         </Grommet>
       </Router>
     </ApolloProvider>
-
   );
 };

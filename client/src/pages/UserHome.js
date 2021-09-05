@@ -10,6 +10,7 @@ export default function UserHome() {
             direction='row'
             pad='xsmall'
             background='dark_2'
+            overflow={{ horizontal: 'hidden', vertical: 'auto' }}
         >
             <Box
                 fill='horizontal'
@@ -17,6 +18,7 @@ export default function UserHome() {
                 align='center'
                 direction='column'
                 flex='shrink'
+
             >
                 <Heading
                     level='2'
