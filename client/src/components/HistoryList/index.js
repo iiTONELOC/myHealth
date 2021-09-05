@@ -1,23 +1,22 @@
-import { Box, DataTable, defaultProps, Heading, Meter, Text } from 'grommet';
-import { RiHeartPulseFill as BpIcon } from 'react-icons/ri';
-import { RiPulseLine as PulseIcon } from 'react-icons/ri';
-import { IoMdClock as ClockIcon } from 'react-icons/io';
+import { Box, DataTable, Text } from 'grommet';
+// import { RiHeartPulseFill as BpIcon } from 'react-icons/ri';
+// import { RiPulseLine as PulseIcon } from 'react-icons/ri';
+// import { IoMdClock as ClockIcon } from 'react-icons/io';
 
 
 const formatDate = (date) => {
-    console.log(date)
     const d = new Date(date);
-    return d.toLocaleDateString()
-}
+    return d.toLocaleDateString();
+};
 const formatTime = (date) => {
     const time = new Date(date).toLocaleTimeString();
     return time
-}
+};
 const renderDetail = (data) => {
     return (
-        <Text>{data}</Text>
-    )
-}
+        <Text size='large' alignSelf='center'>{data}</Text>
+    );
+};
 const columns = [
     {
         property: 'date',
@@ -41,20 +40,6 @@ const columns = [
     },
 ];
 
-
-// const DATA = [
-
-//     {
-//         key: 1,
-//         name: 'Ilana',
-//         location: 'Bay Area',
-//         date: '',
-//         percent: 0,
-//         paid: 0,
-//     },
-
-// ]
-
 export const HistoryList = (DATA) => {
     const d = DATA.me.dailyReadings.map((el, idx) => (
         {
@@ -64,26 +49,19 @@ export const HistoryList = (DATA) => {
             pulse: el.pulse,
             bloodPressure: `${el.systolic}/${el.diastolic}`
         }
-    ))
+    )).sort((a, b) => a.date - b.date);
     const step = 10;
-    const load = () => {
-        console.log(`InfiniteScroll fires onMore after loading ${step} items`);
-    };
-
-
     return (
-        <Box align="center" pad="large" fill>
+        <Box align="center" pad="small" fill>
             <DataTable
                 columns={columns}
                 data={d}
                 step={step}
-                onMore={() => load()}
+                paginate
                 border={{ side: 'bottom', color: 'dark_3' }}
-                pad='small'
+                pad='medium'
+
             />
         </Box>
     );
-
 };
-
-

@@ -7,7 +7,6 @@ import DatePickerForm from "../DatePickerForm";
 import CustomButton from '../CustomButton';
 import { ADD_DAILY_RD } from '../../utils/mutations';
 
-
 export default function DailyReadingForm() {
     const initValue = 60;
     const initSystolic = 120;
@@ -17,64 +16,68 @@ export default function DailyReadingForm() {
     const [systolic, setSystolic] = useState(initSystolic);
     const [diastolic, setDiastolic] = useState(initDiastolic);
     const [date, setDate] = useState(false);
+    const [time, setTime] = useState(false);
     const [message, setMessage] = useState(false);
     const [showDatePicker, setDatePicker] = useState(false);
     const [addDailyReading] = useMutation(ADD_DAILY_RD);
     function isInitial() {
         if (count !== 0 || value !== initValue || systolic !== initSystolic || diastolic !== initDiastolic) {
-            return false
+            return false;
         } else {
-            return true
-        }
-    }
+            return true;
+        };
+    };
     const showButton = {
         isInitial: isInitial()
-    }
+    };
     const systolicHandler = (e) => {
-        e.preventDefault()
-        setSystolic(e.target.value)
-
-    }
+        e.preventDefault();
+        setSystolic(e.target.value);
+    };
     const diastolicHandler = (e) => {
-        setDiastolic(e.target.value)
-
-    }
+        setDiastolic(e.target.value);
+    };
     const bpfd = {
         systolic, diastolic, systolicHandler, diastolicHandler, showDatePicker
-    }
+    };
     const setInitial = () => {
         setValue(initValue);
         setSystolic(initSystolic);
         setDiastolic(initDiastolic);
         setDatePicker(false);
         if (count > 0) setCount(0);
-    }
+    };
     const handleDateChange = (e) => {
-        const timeStamp = new Date(e.target.value).getTime();
-        setDate(timeStamp);
-    }
+        setDate(e.target.value);
+    };
+    const handleTimeChange = (e) => {
+        setTime(e.target.value);
+    };
     const createNewEntry = async () => {
+        // build dateTime obj
+        // needs timestamp format for db
+
         const dailyVars = {
             pulse: parseFloat(value),
             systolic: parseFloat(systolic),
             diastolic: parseFloat(diastolic),
-            dateTime: date ? date : Date.now()
+            dateTime: date && time ? new Date(`${date}T${time}`).getTime() : Date.now()
         }
         return addDailyReading({ variables: { ...dailyVars } });
-    }
+    };
     const handleMessage = (message) => {
         setMessage(message);
         setTimeout(() => {
-            setMessage(false)
+            setMessage(false);
         }, 3000)
-    }
+    };
     const SubmitAndReset = () => {
         const shouldRefresh = createNewEntry();
         if (shouldRefresh) {
             setInitial();
-            handleMessage('Daily Entry successfully added!')
-        }
-    }
+            handleMessage('Daily Entry successfully added!');
+        };
+    };
     const entryHandler = (e) => {
         if (count < 1) {
             const useDefault = window.confirm('Hit ok to use current date and time, hit cancel to input');
@@ -85,21 +88,19 @@ export default function DailyReadingForm() {
                 setDatePicker(true);
             }
         } else {
-            SubmitAndReset()
-        }
+            SubmitAndReset();
+        };
     };
     const cancelHandler = (e) => {
-        e.preventDefault()
-        return setInitial()
+        e.preventDefault();
+        return setInitial();
     }
     const btnData = {
         name: 'Submit Entry', onClick: (e) => entryHandler(e),
     };
-
     const CancelData = {
         name: 'Cancel', onClick: (e) => cancelHandler(e), color: 'red', colorHover: 'black'
-    }
-
+    };
     return (
         <>
             <Box
@@ -113,7 +114,11 @@ export default function DailyReadingForm() {
                 <Box fill direction='row' justify='center' margin={{ bottom: '5px' }}>
                     <PulseForm value={value} set={(e) => setValue(e.target.value)} />
                     <BloodPressureForm {...bpfd} />
-                    {showDatePicker && (<DatePickerForm onChange={(e) => handleDateChange(e)} />)}
+                    {showDatePicker && (
+                        <DatePickerForm
+                            onDateChange={(e) => handleDateChange(e)}
+                            onTimeChange={(e) => handleTimeChange(e)}
+                        />)}
                 </Box>
                 <Box
                     fill='horizontal'
@@ -142,5 +147,5 @@ export default function DailyReadingForm() {
                 </Box>
             </Box>
         </>
-    )
-}
+    );
+};

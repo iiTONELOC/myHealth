@@ -31,11 +31,11 @@ export default function Login() {
             }
         } else if (event.target.name === 'password') {
             if (event.target.value.length < 6) {
-                setPasswordError(`Password's must be at least 5 characters!`)
+                setPasswordError(`Password's must be at least 5 characters!`);
             } else {
-                setPasswordError(``)
-            }
-        }
+                setPasswordError(``);
+            };
+        };
     };
     const handleFormSubmit = async event => {
         event.preventDefault();
@@ -48,11 +48,11 @@ export default function Login() {
                 const data = userData;
                 const { login } = await data;
                 const { token } = await login;
-                Auth.login(token)
+                Auth.login(token);
             }
         } catch (e) {
             console.error(e);
-        }
+        };
     };
     return (
         <Box

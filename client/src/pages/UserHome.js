@@ -1,20 +1,8 @@
-
 import { Box, Heading } from 'grommet';
 import DailyReadingForm from '../components/DailyReadingForm';
 
-
 export default function UserHome() {
-
     return (
-        /*
-        need a layout container
-        switches between row and column for mobile and desktop views
-        container holds 
-        -enter pulse component
-        -enter BloodPressure component
-        History component
-        */
-
         <Box
             fill
             justify='center'
@@ -25,7 +13,6 @@ export default function UserHome() {
         >
             <Box
                 fill='horizontal'
-
                 justify='start'
                 align='center'
                 direction='column'
@@ -38,9 +25,8 @@ export default function UserHome() {
                 >
                     Blood Pressure Tracker
                 </Heading>
-                {/* box that holds the components will act as a form */}
                 <DailyReadingForm />
             </Box>
         </Box>
-    )
-}
+    );
+};

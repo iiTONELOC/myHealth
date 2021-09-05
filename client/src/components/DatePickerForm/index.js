@@ -1,7 +1,7 @@
 
 import { Box, Text } from 'grommet';
 import { FaCalendarPlus as CalendarIcon } from 'react-icons/fa'
-export default function DatePickerForm({ onChange }) {
+export default function DatePickerForm({ onDateChange, onTimeChange }) {
 
 
     return (
@@ -40,14 +40,25 @@ export default function DatePickerForm({ onChange }) {
                         >
                             Enter Date
                         </Text>
-
-                        <input type='datetime-local' onChange={onChange} />
+                        <input type='date' onChange={onDateChange} />
                     </Box>
 
+                    <Box
+                        margin={{ top: '15px' }}
+                        fill
+                        justify='start'
+                    >
+                        <Text
+                            size="medium"
+                            weight="bold"
+                            alignSelf='center'
+                        >
+                            Enter Time
+                        </Text>
+                        <input type='time' onChange={onTimeChange} />
+                    </Box>
                 </Box>
             </Box>
-
         </Box>
-
     )
 }

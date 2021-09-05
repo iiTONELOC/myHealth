@@ -26,15 +26,14 @@ function RangeInputs(props) {
                 {props.value}
             </Text>
         </Box>
-    )
-}
-
+    );
+};
 
 export default function BloodPressureForm({ systolic, diastolic, systolicHandler, diastolicHandler, showDatePicker }) {
     const rangeData = [
         { name: `Systolic Pressure`, min: '60', max: '210', onChange: (e) => systolicHandler(e), value: systolic },
         { name: 'Diastolic Pressure', min: '60', max: '150', onChange: (e) => diastolicHandler(e), value: diastolic }
-    ]
+    ];
     return (
         <Card
             background='dark'
@@ -64,5 +63,5 @@ export default function BloodPressureForm({ systolic, diastolic, systolicHandler
                 </Box>
             </CardBody>
         </Card>
-    )
-}
+    );
+};

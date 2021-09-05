@@ -10,15 +10,10 @@ const resolvers = {
             if (context.user) {
                 const userData = await User.findOne({ _id: context.user._id })
                     .select('-__v -password')
-                    .populate('dailyReadings')
+                    .populate('dailyReadings');
                 return userData;
             }
             throw new AuthenticationError('Not logged in');
-        },
-        bloodPressure: async (parent, { _id }, context) => {
-            const params = _id ? { _id } : {};
-            return BloodPressure.find(params)
-                .select('-__v');
         },
         // get all users
         // get user by username
@@ -26,7 +21,7 @@ const resolvers = {
         users: async (parent, { _id, username }) => {
             const params = _id ? { _id } : username ? { username } : {};
             return User.find(params)
-                .select('-__v -password')
+                .select('-__v -password');
         },
     },
     Mutation: {
@@ -36,14 +31,14 @@ const resolvers = {
             return { token, user };
         },
         login: async (parent, { email, password }) => {
-            const user = await User.findOne({ email })
+            const user = await User.findOne({ email });
             if (!user) {
                 throw new AuthenticationError('Incorrect credentials');
-            }
+            };
             const correctPw = await user.isCorrectPassword(password);
             if (!correctPw) {
                 throw new AuthenticationError('Incorrect credentials');
-            }
+            };
             const token = signToken(user);
             return { token, user };
         },
@@ -57,12 +52,11 @@ const resolvers = {
                     const updatedUserInfo = await User.findByIdAndUpdate(context.user._id, {
                         $push: { dailyReadings: _id }
                     }, { new: true }).select('-__v');;
-                    return updatedUserInfo
-                }
-            }
-        }
+                    return updatedUserInfo;
+                };
+            };
+        },
     },
-
 };
 
 module.exports = resolvers;
