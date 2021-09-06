@@ -19,52 +19,52 @@ export default function SignUp() {
     const [signUpError, setAlert] = useState('');
     const [addUser, { error }] = useMutation(ADD_USER);
     const handleChange = (e) => {
-        setFormState({ ...formState, [e.target.name]: e.target.value });
-        if (e.target.name === 'email') {
-            const isValid = validateEmail(e.target.value);
+        const name = e.target.name;
+        const value = e.target.value;
+        setFormState({ ...formState, [name]: value });
+        if (name === 'email') {
+            const isValid = validateEmail(value);
             if (!isValid) {
                 setEmailError('Your email is invalid.');
             } else {
                 setEmailError('');
-            }
-        } else if (e.target.name === 'username') {
-            if (e.target.value.length < 2) {
-                setUserError(`Username's must be at least 2 characters!`)
+            };
+        } else if (name === 'username') {
+            if (value.length < 2) {
+                setUserError(`Username's must be at least 2 characters!`);
             } else {
-                setUserError('')
-            }
-        } else if (e.target.name === 'password') {
-            if (e.target.value.length < 6) {
-                setPasswordError(`Password's must be at least 5 characters!`)
+                setUserError('');
+            };
+        } else if (name === 'password') {
+            if (value.length < 6) {
+                setPasswordError(`Password's must be at least 5 characters!`);
             } else {
-                setPasswordError(``)
-            }
-        }
-
+                setPasswordError(``);
+            };
+        };
     };
     const handleFormSubmit = async (event) => {
         event.preventDefault();
         try {
             const { data } = await addUser({
-                variables: { ...formState }
+                variables: { ...formState },
             });
             if (data.addUser !== null) {
                 Auth.login(data.addUser.token);
             } else {
-                console.log(data)
-            }
+                console.log(data);
+            };
             return
         } catch (e) {
             console.log(e);
-            setAlert(true)
+            setAlert(true);
             setTimeout(() => {
-                setAlert('')
-            }, 9000)
-        }
+                setAlert('');
+            }, 9000);
+        };
     };
     return (
         <Box
-
             align="center"
             justify="center"
             background='black'

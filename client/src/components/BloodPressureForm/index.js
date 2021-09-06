@@ -1,4 +1,4 @@
-import { Box, Text, Card, CardBody, RangeInput } from 'grommet';
+import { Box, Text, Card, CardBody } from 'grommet';
 import { RiHeartPulseFill as PulseIcon } from 'react-icons/ri';
 function RenderInputs(props) {
     return (
