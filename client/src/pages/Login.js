@@ -56,13 +56,15 @@ export default function Login() {
     };
     return (
         <Box
-            fill
+            fill='horizontal'
+            height='91vh'
             align="center"
             justify="center"
             background='black'
+            direction='row'
         >
             <Box
-                overflow="auto"
+
                 width="medium"
                 pad="medium"
                 background='dark-1'
@@ -73,7 +75,7 @@ export default function Login() {
                     </Heading>
                     {error && error.message}
                 </Box>
-                <Box flex="grow" overflow="auto" pad='small'>
+                <Box flex="grow" pad='small'>
                     <FormField label="Email" >
                         <TextInput
                             color='brand_accent'

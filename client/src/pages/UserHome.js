@@ -18,7 +18,7 @@ export default function UserHome() {
                 align='center'
                 direction='column'
                 flex='shrink'
-
+                height={{ min: '91vh' }}
             >
                 <Heading
                     level='2'
