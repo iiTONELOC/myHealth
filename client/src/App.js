@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { Box, Grommet } from 'grommet';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { theme } from './grommetTheme';
@@ -10,23 +9,18 @@ import SignUp from './pages/SignUp';
 import Login from './pages/Login';
 import UserHome from './pages/UserHome';
 import UserHistory from './pages/UserHistory'
-import { appResize, getHeight, getWidth } from './utils/resizer';
+
 
 export default function App() {
-  const [windowWidth, setWindowWidth] = useState(getWidth());
-  const [windowHeight, setWindowHeight] = useState(getHeight());
-  const resizeData = {
-    setWidth: setWindowWidth,
-    setHeight: setWindowHeight
-  }
-  appResize(resizeData);
+
   return (
     <ApolloProvider client={client}>
       <Router>
         <Grommet theme={theme} background='dark' >
           <Box
-            width={`${windowWidth}px`}
-            height={`${windowHeight}px`}
+            // width={`${windowWidth}px`}
+            // height={`${windowHeight}px`}
+            fill
           >
             <PageHeader />
             <Switch>

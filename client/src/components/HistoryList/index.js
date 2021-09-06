@@ -1,8 +1,5 @@
+import { useState } from 'react';
 import { Box, DataTable, Text } from 'grommet';
-// import { RiHeartPulseFill as BpIcon } from 'react-icons/ri';
-// import { RiPulseLine as PulseIcon } from 'react-icons/ri';
-// import { IoMdClock as ClockIcon } from 'react-icons/io';
-
 
 const formatDate = (date) => {
     const d = new Date(date);
@@ -41,6 +38,7 @@ const columns = [
 ];
 
 export const HistoryList = (DATA) => {
+    const [print, setPrint] = useState(false);
     const d = DATA.me.dailyReadings.map((el, idx) => (
         {
             key: idx,
@@ -50,9 +48,16 @@ export const HistoryList = (DATA) => {
             bloodPressure: `${el.systolic}/${el.diastolic}`
         }
     )).sort((a, b) => a.date - b.date);
+    const handlePrint = async () => {
+        setPrint(true)
+        setTimeout(() => {
+            window.print();
+            setPrint(false)
+        }, 500)
+    }
     const step = 7;
     return (
-        <Box align="center" pad="small" fill>
+        !print ? (<><Box align="center" pad="small" fill >
             <DataTable
                 columns={columns}
                 data={d}
@@ -63,5 +68,18 @@ export const HistoryList = (DATA) => {
                 fill
             />
         </Box>
+            <Box alignSelf='end' margin={{ top: '5px' }} onClick={handlePrint} >
+                <Text>Print History</Text>
+            </Box> </>) : (
+            <>
+                <DataTable
+                    columns={columns}
+                    data={d}
+                    border={{ side: 'bottom', color: 'dark_3' }}
+                    pad='medium'
+                    fill
+                />
+            </>
+        )
     );
 };

@@ -54,6 +54,7 @@ export default function PageHeader() {
             justify="between"
             background="dark_1"
             pad='small'
+            height='75px'
         >
             <Box>
                 <Text color='accent-1' size='xxlarge' onClick={() => window.location.assign('/')}>H</Text>
