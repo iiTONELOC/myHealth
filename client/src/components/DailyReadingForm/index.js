@@ -5,7 +5,7 @@ import BloodPressureForm from "../BloodPressureForm";
 import DatePickerForm from "../DatePickerForm";
 import CustomButton from '../CustomButton';
 import { ADD_DAILY_RD } from '../../utils/mutations';
-import './input.css'
+
 export default function DailyReadingForm() {
     const initValue = 60;
     const initSystolic = 120;
@@ -19,6 +19,7 @@ export default function DailyReadingForm() {
     const [message, setMessage] = useState(false);
     const [showDatePicker, setDatePicker] = useState(false);
     const [addDailyReading] = useMutation(ADD_DAILY_RD);
+    const [orientation, setOrientation] = useState('row')
     function isInitial() {
         if (count !== 0 || value !== initValue || systolic !== initSystolic || diastolic !== initDiastolic) {
             return false;
@@ -26,6 +27,18 @@ export default function DailyReadingForm() {
             return true;
         };
     };
+    function handleSize() {
+        const width = window.innerWidth;
+        if (width <= 768) {
+            if (orientation !== 'column')
+                setOrientation('column')
+        } else {
+            if (orientation !== 'row')
+                setOrientation('row')
+        }
+    }
+    handleSize()
+    window.addEventListener('resize', handleSize)
     const showButton = {
         isInitial: isInitial(),
     };
@@ -99,11 +112,12 @@ export default function DailyReadingForm() {
         return setInitial();
     }
     const btnData = {
-        name: 'Submit Entry', onClick: (e) => entryHandler(e),
+        name: 'Submit Entry', onClick: (e) => entryHandler(e), color: 'dark_2', colorHover: 'status-ok',
     };
     const CancelData = {
-        name: 'Cancel', onClick: (e) => cancelHandler(e), colorHover: 'status-critical'
+        name: 'Cancel', onClick: (e) => cancelHandler(e), color: 'red', colorHover: 'status-critical'
     };
+
     return (
         <>
             <Box
@@ -111,7 +125,8 @@ export default function DailyReadingForm() {
                 direction='column'
                 justify='center'
                 align='center'
-                pad='small'
+                pad='medium'
+
             >
                 {message && (
                     <Text
@@ -127,17 +142,26 @@ export default function DailyReadingForm() {
                 )}
                 <Box
                     fill
-                    direction='row'
+                    direction={orientation}
                     justify='center'
                     alignContent='center'
                     margin={{ bottom: '5px' }}
+                    gap='large'
                 >
                     <BloodPressureForm {...bloodPressureFormData} />
                     {showDatePicker && (
-                        <DatePickerForm
-                            onDateChange={(e) => handleDateChange(e)}
-                            onTimeChange={(e) => handleTimeChange(e)}
-                        />)}
+                        <Box
+                            width='450px'
+                            justify='center'
+                            alignContent='center'
+                            alignSelf='center'
+                        >
+                            <DatePickerForm
+                                onDateChange={(e) => handleDateChange(e)}
+                                onTimeChange={(e) => handleTimeChange(e)}
+                            />
+                        </Box>
+                    )}
                 </Box>
                 <Box
                     fill='horizontal'

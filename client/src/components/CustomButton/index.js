@@ -8,14 +8,13 @@ export default function CustomButton(props) {
     };
     return (
         <Box
-            pad='small'
-            round='xsmall'
             onMouseOver={() => handleActive()}
             onMouseOut={() => handleActive()}
-            background={active ? props.colorHover ? props.colorHover : 'status-ok' : props.color ? props.color : 'gray'}
+            background={active ? props.colorHover ? props.colorHover : 'status-ok' : props.color ? props.color : 'brand'}
             onClick={onClick}
+            style={{ padding: '12px', borderRadius: '8px' }}
         >
-            <Text alignSelf='center' color={'white'} size={active ? 'large' : 'medium'} style={{ textShadow: `1px 1px 1px black`, letterSpacing: '1px' }}>{name}</Text>
+            <Text alignSelf='center' color={'white'} style={{ textShadow: `2px 1px 1px black`, letterSpacing: '1px' }}>{name}</Text>
         </Box>
     );
 };

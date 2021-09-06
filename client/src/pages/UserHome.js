@@ -9,7 +9,6 @@ export default function UserHome() {
             align='start'
             direction='row'
             pad='xsmall'
-            background='dark_2'
             overflow={{ horizontal: 'hidden', vertical: 'auto' }}
         >
             <Box

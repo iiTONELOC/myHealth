@@ -9,7 +9,7 @@ import SignUp from './pages/SignUp';
 import Login from './pages/Login';
 import UserHome from './pages/UserHome';
 import UserHistory from './pages/UserHistory'
-
+import './input.css'
 
 export default function App() {
 

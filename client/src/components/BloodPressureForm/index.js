@@ -9,7 +9,7 @@ function RenderInputs(props) {
             <Text
                 size="large"
                 weight='bold'
-                alignSelf='center'
+                alignSelf='start'
                 style={{ marginTop: '10px', textShadow: `1px 1px 1px black`, letterSpacing: '1px' }}
             >
                 {props.name}
@@ -23,7 +23,7 @@ function RenderInputs(props) {
             <Text
                 size="medium"
                 weight="bold"
-                alignSelf='center'
+                alignSelf='start'
                 style={{ marginTop: '15px' }}
             >
                 {/* {props.value} */}
@@ -32,19 +32,18 @@ function RenderInputs(props) {
     );
 };
 
-export default function BloodPressureForm({ systolic, diastolic, systolicHandler, diastolicHandler, setValue, showDatePicker, value }) {
+export default function BloodPressureForm({ systolic, diastolic, systolicHandler, diastolicHandler, setValue, value }) {
     const inputData = [
         { name: `Pulse`, min: '40', max: '150', onChange: (e) => setValue(e), value: value },
         { name: `Systolic Pressure`, min: '60', max: '210', onChange: (e) => systolicHandler(e), value: systolic },
-        { name: 'Diastolic Pressure', min: '60', max: '150', onChange: (e) => diastolicHandler(e), value: diastolic }
+        { name: 'Diastolic Pressure', min: '60', max: '150', onChange: (e) => diastolicHandler(e), value: diastolic },
     ];
     return (
         <Card
-            background='dark'
+            background='dark_1'
             elevation='none'
             alignSelf='center'
             width='450px'
-            margin={{ left: '13px', right: showDatePicker ? '13px' : null }}
         >
             <CardBody pad="small">
                 <Box
@@ -53,7 +52,13 @@ export default function BloodPressureForm({ systolic, diastolic, systolicHandler
                     size="small"
                     align="center"
                 >
-                    <PulseIcon size='55' color='red' />
+                    <Box
+                        background='dark'
+                        align='center'
+                        style={{ padding: '10px', borderRadius: '50%' }}
+                    >
+                        <PulseIcon size='50' color='#6FFFB0' />
+                    </Box>
                     <Box
                         justify='center'
                         alignSelf='center'

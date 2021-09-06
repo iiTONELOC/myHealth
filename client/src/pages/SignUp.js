@@ -127,7 +127,7 @@ export default function SignUp() {
                     </FormField>
                     {passwordError && (<div style={{ color: 'red' }}>{passwordError}</div>)}
                     <Box flex={false} as="footer" align="start" pad='small'>
-                        {!userError && !emailError && !passwordError && (<Button
+                        {formState.email !== '' && formState.password !== '' && formState.username !== '' && !userError && !emailError && !passwordError && (<Button
                             type="submit"
                             label="Sign Up"
                             onClick={handleFormSubmit}

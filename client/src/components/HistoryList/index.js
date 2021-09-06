@@ -49,28 +49,33 @@ export const HistoryList = (DATA) => {
         }
     )).sort((a, b) => a.date - b.date);
     const handlePrint = async () => {
-        setPrint(true)
+        setPrint(true);
         setTimeout(() => {
             window.print();
-            setPrint(false)
+            setPrint(false);
         }, 500)
     }
-    const step = 7;
+    const step = 14;
     return (
-        !print ? (<><Box align="center" pad="small" fill >
+        !print ? (<><Box align="center" fill >
             <DataTable
                 columns={columns}
                 data={d}
                 step={step}
                 paginate
                 border={{ side: 'bottom', color: 'dark_3' }}
-                pad='medium'
+                pad='small'
                 fill
             />
         </Box>
-            <Box alignSelf='end' margin={{ top: '5px' }} onClick={handlePrint} >
-                <Text>Print History</Text>
-            </Box> </>) : (
+            {d.length > 0 &&
+                (
+                    <Box alignSelf='end' margin={{ top: '5px' }} onClick={handlePrint} >
+                        <Text>Print History</Text>
+                    </Box>
+                )
+            }
+        </>) : (
             <>
                 <DataTable
                     columns={columns}

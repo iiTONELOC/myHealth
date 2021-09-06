@@ -6,21 +6,27 @@ export default function DatePickerForm({ onDateChange, onTimeChange }) {
 
     return (
         <Box
-            background='dark'
+            background='dark_1'
             elevation='none'
             height='300px'
             width='250px'
             round='small'
             direction='column'
             justify='evenly'
+            alignSelf='center'
         >
-
             <Box
                 align="center"
                 fill
                 pad='xsmall'
             >
-                <CalendarIcon size='50' color='red' style={{ marginTop: '20px' }} />
+                <Box
+                    background='dark'
+                    align='center'
+                    style={{ padding: '10px', borderRadius: '50%' }}
+                >
+                    <CalendarIcon size='50' color='#6FFFB0' />
+                </Box>
                 <Box
                     justify='between'
                     alignSelf='center'
@@ -40,9 +46,8 @@ export default function DatePickerForm({ onDateChange, onTimeChange }) {
                         >
                             Enter Date
                         </Text>
-                        <input type='date' onChange={onDateChange} />
+                        <input className='customInput' type='date' onChange={onDateChange} />
                     </Box>
-
                     <Box
                         margin={{ top: '15px' }}
                         fill
@@ -55,10 +60,10 @@ export default function DatePickerForm({ onDateChange, onTimeChange }) {
                         >
                             Enter Time
                         </Text>
-                        <input type='time' onChange={onTimeChange} />
+                        <input className='customInput' type='time' onChange={onTimeChange} />
                     </Box>
                 </Box>
             </Box>
         </Box>
-    )
-}
+    );
+};

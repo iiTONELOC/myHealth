@@ -1,7 +1,16 @@
-
+import { Box } from "grommet";
 export default function HomePage() {
 
+
     return (
-        `Welcome to MyHealth! Please sign in or create an account!`
+        <Box
+            fill
+            justify='center'
+            alignContent='center'
+            background='black'
+            height={{ min: '90vh' }}
+        >
+            Welcome to MyHealth!
+        </Box>
     )
 }
